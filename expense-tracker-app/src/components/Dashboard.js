@@ -7,7 +7,7 @@ const initialExpenses = [
     id: "1",
     title: "Groceries",
     amount: 50.0,
-    category: "Food",
+    category: "Other",
     date: "2024-11-01",
   },
   {
@@ -29,28 +29,23 @@ const initialExpenses = [
 const Dashboard = () => {
   const [expenses, setExpenses] = useState(initialExpenses);
 
-  // Add a new expense to the list
   const handleAddExpense = (expense) => {
     const newExpense = {
       ...expense,
-      id: Date.now().toString(), // Unique ID for the expense
-      date: new Date().toISOString().split("T")[0], // Current date in YYYY-MM-DD format
+      id: Date.now().toString(),
+      date: new Date().toISOString().split("T")[0],
     };
     setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
   };
 
   return (
-    <div>
-      <h2>Expense Dashboard</h2>
-
-      {/* Add Expense Form */}
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Expense Dashboard</h2>
       <AddExpense onAddExpense={handleAddExpense} />
-
-      {/* Expense List */}
       {expenses.length > 0 ? (
         <ExpenseList expenses={expenses} />
       ) : (
-        <p>No expenses added yet!</p>
+        <p className="text-center text-gray-600 mt-4">No expenses added yet!</p>
       )}
     </div>
   );
