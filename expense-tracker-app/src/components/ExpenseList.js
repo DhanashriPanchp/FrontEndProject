@@ -30,14 +30,30 @@ const ExpenseList = ({ expenses }) => {
           <option value="Other">Other</option>
         </select>
       </div>
-      <ul className="divide-y divide-gray-200">
-        {filteredExpenses.map((expense, index) => (
-          <li key={index} className="py-2">
-            <span className="font-semibold">{expense.title}</span> - ${expense.amount} (
-            <span className="text-gray-500">{expense.category}</span>)
-          </li>
-        ))}
-      </ul>
+      {filteredExpenses.length > 0 ? (
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr>
+              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {filteredExpenses.map((expense, index) => (
+              <tr key={index}>
+                <td className="px-4 py-2 whitespace-nowrap">{expense.title}</td>
+                <td className="px-4 py-2 whitespace-nowrap">${expense.amount}</td>
+                <td className="px-4 py-2 whitespace-nowrap">{expense.category}</td>
+                <td className="px-4 py-2 whitespace-nowrap">{expense.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="text-center text-gray-600 mt-4">No expenses found!</p>
+      )}
     </div>
   );
 };

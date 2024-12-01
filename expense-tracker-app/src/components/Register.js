@@ -1,16 +1,58 @@
 import React, { useState } from "react";
+import Ajv from "ajv";
+import { useNavigate } from "react-router-dom";
+
+// Function to generate a unique ID
+const generateUniqueId = () => {
+  return Date.now().toString() + Math.floor(Math.random() * 1000).toString();
+};
 
 const Register = () => {
   const [user, setUser] = useState({ username: "", email: "", password: "" });
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Define the JSON Schema within the component
+  const userSchema = {
+    type: "object",
+    properties: {
+      username: { type: "string", minLength: 1 },
+      email: { type: "string", format: "email" },
+      password: { type: "string", minLength: 6 }
+    },
+    required: ["username", "email", "password"]
+  };
+
+  const ajv = new Ajv();
+  const validate = ajv.compile(userSchema);
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (!user.username || !user.email || !user.password) {
-      alert("Please fill all fields!");
+
+    // Validate user data against schema
+    if (!validate(user)) {
+      alert("Invalid input! Please check your details.");
       return;
     }
+
+    // Retrieve existing users from local storage
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Check if email already exists
+    if (existingUsers.some(u => u.email === user.email)) {
+      alert("Email already registered!");
+      return;
+    }
+
+    // Add new user with a unique ID to the list
+    const newUser = { ...user, id: generateUniqueId() };
+    existingUsers.push(newUser);
+    localStorage.setItem("users", JSON.stringify(existingUsers));
+
     alert("User registered successfully!");
     setUser({ username: "", email: "", password: "" });
+
+    // Redirect to login page
+    navigate("/login");
   };
 
   return (

@@ -15,6 +15,7 @@ const LandingPage = () => {
       <main className="flex-grow">
         {/* Hero Section with Solid Background Color */}
         <section
+          id="hero"
           className="flex flex-col justify-center items-center text-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-20"
         >
           <motion.div
@@ -37,7 +38,7 @@ const LandingPage = () => {
         </section>
 
         {/* Features Section */}
-        <section className="bg-gray-100 py-20">
+        <section id="features" className="bg-gray-100 py-20 mt-20">
           <div className="max-w-screen-lg mx-auto px-4">
             <motion.h2
               initial={{ opacity: 0, x: -50 }}
@@ -45,7 +46,7 @@ const LandingPage = () => {
               transition={{ duration: 1 }}
               className="text-3xl font-semibold text-gray-700 mb-8 text-center"
             >
-              Key Features:
+              Features
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
@@ -53,7 +54,7 @@ const LandingPage = () => {
                 { img: featureImage2, title: 'Detailed Reports and Analytics', description: 'Gain insights into your spending habits.' },
                 { img: featureImage3, title: 'Customizable Categories and Budgets', description: 'Tailor categories to fit your needs.' },
               ].map((feature, index) => (
-                <motion.article 
+                <motion.article
                   key={index}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -62,7 +63,7 @@ const LandingPage = () => {
                 >
                   <figure>
                     <img src={feature.img} alt={feature.title} className="w-full h-48 object-cover rounded-t-lg" />
-                    <figcaption className="mt-4">
+                    <figcaption className="mt-4 text-center">
                       <h3 className="text-xl font-bold text-gray-800">{feature.title}</h3>
                       <p className="text-gray-600 mt-2">{feature.description}</p>
                     </figcaption>

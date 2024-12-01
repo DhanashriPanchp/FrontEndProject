@@ -1,13 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Ajv from "ajv";
+import { motion } from "framer-motion";
+import { UserContext } from "./UserContext";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const navigate = useNavigate();
+  const { setCurrentUser } = useContext(UserContext);
+
+  // Define JSON schema for login credentials
+  const credentialsSchema = {
+    type: "object",
+    properties: {
+      username: { type: "string", minLength: 1 },
+      password: { type: "string", minLength: 6 }
+    },
+    required: ["username", "password"]
+  };
+
+  const ajv = new Ajv();
+  const validate = ajv.compile(credentialsSchema);
 
   const handleLogin = () => {
-    if (credentials.username && credentials.password) {
+    // Validate credentials against schema
+    if (!validate(credentials)) {
+      alert("Invalid input! Please check your details.");
+      return;
+    }
+
+    // Retrieve users from local storage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Check if user exists with matching username and password
+    const user = users.find(
+      (user) => user.username === credentials.username && user.password === credentials.password
+    );
+
+    if (user) {
       alert("Logged In");
+      setCurrentUser(user);
       navigate("/dashboard");
     } else {
       alert("Invalid credentials");
@@ -16,7 +48,12 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+      <motion.div
+        className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Login</h2>
         <input
           type="text"
@@ -38,7 +75,7 @@ const Login = () => {
         >
           Login
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 };
