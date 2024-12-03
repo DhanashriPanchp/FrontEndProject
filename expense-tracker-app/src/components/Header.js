@@ -1,34 +1,35 @@
 import React from 'react';
-import { Link as ScrollLink } from 'react-scroll'; // For smooth scrolling
+import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png'; // Ensure you have a logo image
 
 const Header = () => {
-  return (
-    <header className="bg-white shadow-md py-4">
-      <div className="container mx-auto flex items-center justify-between px-4">
-        {/* Logo and Title */}
-        <ScrollLink to="hero" smooth={true} duration={500} className="flex items-center cursor-pointer">
-          <img src={logo} alt="Expense Tracker Logo" className="h-8 mr-3" />
-          <span className="text-blue-600 text-xl font-bold">Expense Tracker</span>
-        </ScrollLink>
+  const navigate = useNavigate();
+  const location = useLocation();
 
-        {/* Navigation Links */}
-        <nav className="flex space-x-4">
-          <ScrollLink
-            to="features"
-            smooth={true}
-            duration={500}
-            className="text-gray-800 hover:text-blue-600 cursor-pointer"
-          >
-            Features
-          </ScrollLink>
-          <a href="/login" className="text-gray-800 hover:text-blue-600">
-            Login
-          </a>
-          <a href="/register" className="text-gray-800 hover:text-blue-600">
-            Signup
-          </a>
-        </nav>
+  const handleLogout = () => {
+    // Clear authentication tokens or any user data
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    // Redirect to login page
+    navigate('/login');
+  };
+
+  // Determine if the current page is login or signup
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+
+  return (
+    <header className="bg-white text-black shadow-md py-4">
+      <div className="container mx-auto flex items-center justify-between px-4">
+        <a href="/" className="flex items-center cursor-pointer">
+          <img src={logo} alt="Expense Tracker Logo" className="h-8 mr-3" />
+          <span className="text-xl font-bold">Expense Tracker</span>
+        </a>
+        {!isAuthPage && (
+          <button onClick={handleLogout} className="text-sm font-medium text-blue-500 hover:text-blue-700">
+            Logout
+          </button>
+        )}
       </div>
     </header>
   );

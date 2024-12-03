@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
 const AddExpense = ({ onAddExpense }) => {
-  const [expense, setExpense] = useState({ title: "", amount: "", category: "" });
+  const [expense, setExpense] = useState({ title: "", amount: "", category: "", date: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!expense.title || !expense.amount || !expense.category) {
+    if (!expense.title || !expense.amount || !expense.category || !expense.date) {
       alert("Please fill out all fields!");
       return;
     }
     onAddExpense({ ...expense, amount: parseFloat(expense.amount) });
-    setExpense({ title: "", amount: "", category: "" });
+    setExpense({ title: "", amount: "", category: "", date: "" });
   };
 
   return (
@@ -44,8 +44,21 @@ const AddExpense = ({ onAddExpense }) => {
           </option>
           <option value="Food">Food</option>
           <option value="Transport">Transport</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Health">Health</option>
+          <option value="Education">Education</option>
+          <option value="Clothing">Clothing</option>
           <option value="Other">Other</option>
         </select>
+      </div>
+      <div className="mb-4">
+        <input
+          type="date"
+          value={expense.date}
+          onChange={(e) => setExpense({ ...expense, date: e.target.value })}
+          className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
       <button
         type="submit"

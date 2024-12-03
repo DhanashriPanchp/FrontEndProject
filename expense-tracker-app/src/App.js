@@ -6,6 +6,7 @@ import ExpenseList from "./components/ExpenseList";
 import AddExpense from "./components/AddExpense";
 import LandingPage from "./components/LandingPage";
 import Register from "./components/Register";
+import Analytics from "./components/Analytics";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/expenseList" element={<ExpenseList />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </div>
     </Router>
