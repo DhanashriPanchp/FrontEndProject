@@ -138,9 +138,9 @@ const LandingPage = () => {
               </motion.h2>
               <div className="space-y-6">
                 {[
-                  { question: "How do I track my expenses?", answer: "You can log expenses manually by entering the amount, category, and date." },
-                  { question: "Can I search my expenses?", answer: "Yes, you can search as well as edit spending across different categories." },
-                  { question: "Can I see statistics of my expenses?", answer: "Yes, you can check your weekly, monthly and yearly expenses in Analytics Dashboard." },
+                  { question: "How do I track my expenses?", answer: "You can log expenses manually by entering the expense name, amount, category, and date of an expense so that you can track your expenses on time-to-time basis." },
+                  { question: "Can I search my expenses?", answer: "Yes, you can search as well as edit and delete the expenses across different categories." },
+                  { question: "Can I see statistics of my expenses?", answer: "Yes, you can check your weekly, monthly and yearly expenses on the Analytics Dashboard. You can view your expenses according to the categories and time-frames" },
                 ].map((faq, index) => (
                   <motion.div
                     key={index}
