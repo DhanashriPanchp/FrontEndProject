@@ -180,7 +180,7 @@ const LandingPage = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
-                class="text-lg text-gray-x00 leading-relaxed text-center"
+                class="text-lg text-gray-600 leading-relaxed text-center"
               >
                 Founded in 2024 , we have continuously worked to improve our platform based on user feedback and the latest technological advancements . Join us on our journey to make financial management accessible and stress-free for everyone.
               </motion.p>
