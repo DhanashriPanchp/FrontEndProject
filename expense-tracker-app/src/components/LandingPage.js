@@ -138,9 +138,9 @@ const LandingPage = () => {
               </motion.h2>
               <div className="space-y-6">
                 {[
-                  { question: "How do I track my expenses?", answer: "You can log expenses manually by entering the amount, category, and date. Our app also supports receipt scanning for quick entry." },
-                  { question: "Can I set budgets?", answer: "Yes, you can create customizable budgets to manage your spending across different categories." },
-                  { question: "Is my financial data secure?", answer: "We use industry-standard encryption to ensure your data is safe and secure." },
+                  { question: "How do I track my expenses?", answer: "You can log expenses manually by entering the amount, category, and date." },
+                  { question: "Can I search my expenses?", answer: "Yes, you can search as well as edit spending across different categories." },
+                  { question: "Can I see statistics of my expenses?", answer: "Yes, you can check your weekly, monthly and yearly expenses in Analytics Dashboard." },
                 ].map((faq, index) => (
                   <motion.div
                     key={index}
@@ -182,7 +182,7 @@ const LandingPage = () => {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 class="text-lg text-gray-x00 leading-relaxed text-center"
               >
-                Founded in 2024 , we have continuously worked to improve our platform based on user feedback and the latest technological advancements . Join us on our journey to make financial management accessible and stress-free for everyone .
+                Founded in 2024 , we have continuously worked to improve our platform based on user feedback and the latest technological advancements . Join us on our journey to make financial management accessible and stress-free for everyone.
               </motion.p>
             </div>
           </section>
