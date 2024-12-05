@@ -7,7 +7,7 @@ import featureImage3 from '../assets/featureImage3.png';
 import girl from '../assets/girl.jpg';
 import boy from '../assets/boy.jpg';
 import Logo from '../assets/logo.png';
-import backgroundVideo from '../assets/background.mp4'; // Import your video file
+import backgroundImage from '../assets/background.png';
 
 const LandingPage = () => {
   const scrollToSection = (sectionId) => {
@@ -29,12 +29,13 @@ const LandingPage = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col">
-      {/* Video Background */}
+      {/* Image Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <video className="w-100% h-100% object-cover" autoPlay loop muted>
-          <source src={backgroundVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <img
+          src={backgroundImage}
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
       </div>
 
       {/* Header */}
@@ -44,13 +45,6 @@ const LandingPage = () => {
             <img src={Logo} alt="Expense Tracker Logo" className="h-8 mr-3" />
             <span className="text-xl font-bold">Expense Tracker</span>
           </a>
-          <nav className="flex space-x-4">
-            <button onClick={() => scrollToSection('features')} className="hover:text-gray-700 font-bold">Features</button>
-            <button onClick={() => scrollToSection('testimonials')} className="hover:text-gray-700 font-bold">Testimonials</button>
-            <button onClick={() => scrollToSection('faqs')} className="hover:text-gray-700 font-bold">FAQs</button>
-            <button onClick={() => scrollToSection('about')} className="hover:text-gray-700 font-bold">About</button>
-            <a href="/login" className="hover:text-gray-700 font-bold">Login</a>
-          </nav>
         </div>
       </header>
 
@@ -70,7 +64,7 @@ const LandingPage = () => {
               Get Started
             </motion.a>
           </motion.div>
-         
+
           {/* Down Arrow */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }} className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer" onClick={() => scrollToSection('features')}>
             <FaChevronDown size={30} className="animate-bounce text-black" />
@@ -138,7 +132,7 @@ const LandingPage = () => {
               </motion.h2>
               <div className="space-y-6">
                 {[
-                  { question: "How do I track my expenses?", answer: "You can log expenses manually by entering the expense name, amount, category, and date of an expense so that you can track your expenses on time-to-time basis." },
+                  { question: "How do I track my expenses?", answer: "You can log expenses manually by entering the expense name, amount, category, and date of an expense so that you can track your expenses on time-to-time." },
                   { question: "Can I search my expenses?", answer: "Yes, you can search as well as edit and delete the expenses across different categories." },
                   { question: "Can I see statistics of my expenses?", answer: "Yes, you can check your weekly, monthly and yearly expenses on the Analytics Dashboard. You can view your expenses according to the categories and time-frames" },
                 ].map((faq, index) => (
